@@ -13,6 +13,231 @@ void main() {
   ));
 }
 
+class Menu extends StatefulWidget {
+  const Menu({Key? key}) : super(key: key);
+
+  @override
+  State<Menu> createState() => _MenuState();
+}
+
+class Gameover extends StatefulWidget {
+  const Gameover({Key? key}) : super(key: key);
+
+  @override
+  State<Gameover> createState() => MenuState();
+}
+
+class MenuState extends State<Gameover> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('menu.jpg'), fit: BoxFit.cover)),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+                  Colors.black12.withOpacity(0.0),
+                  Colors.black87.withOpacity(0.6)
+                ], begin: Alignment.center),
+              ),
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 1366.0,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: const [Colors.black12, Colors.black87])),
+                  )),
+            ),
+          ),
+          Positioned(
+              left: 700,
+              bottom: 200,
+              child: Image.asset(
+                'gameover.png',
+                width: 600,
+                height: 500,
+              )),
+          Positioned(
+              left: 800,
+              bottom: 150,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(184, 218, 165, 32),
+                      padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+                  child: Text('Try Again',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )))),
+          Positioned(
+              left: 1070,
+              bottom: 150,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Menu()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(184, 218, 165, 32),
+                      padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+                  child: Text('Exit',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )))),
+        ],
+      ),
+    );
+  }
+}
+
+class Getpicture extends StatelessWidget {
+  int selector = 0;
+
+  final Function callback;
+  Getpicture({
+    Key? key,
+    required this.callback,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        onPressed: () {
+          selector = Random().nextInt(52);
+          callback(selector);
+        },
+        style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(184, 218, 165, 32),
+            padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+        child: Text('REVEAL',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 40,
+              color: Color.fromARGB(255, 252, 252, 252),
+            )));
+  }
+}
+
+ResponsiveWidget({required Column mobile, required Column desktop}) {}
+
+class Howtoplay extends StatelessWidget {
+  const Howtoplay({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+            body: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('backgroundhelp.jpg'),
+                        fit: BoxFit.cover)),
+                child: Stack(children: [
+                  Positioned(
+                      left: 650,
+                      bottom: 90,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Menu()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Color.fromARGB(184, 218, 165, 32),
+                              padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+                          child: Text('Back',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 40,
+                                color: Color.fromARGB(255, 255, 255, 255),
+                              )))),
+                  Positioned(
+                    left: 190,
+                    bottom: 230,
+                    child: SingleChildScrollView(
+                        child: Column(
+                      children: const [
+                        Text('Instructions:',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 253, 250, 250),
+                            )),
+                        Text(' ',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                        Text(
+                            'To play the game, click the reveal button first to reveal the first card,',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                        Text(
+                            'After that, you can choose between HIGH or LOW to guess the next card,',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                        Text(
+                            'Click the reveal button again and repeat the steps,',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                        Text(
+                            'Just click REVEAL, choose between HIGH or LOW then click REVEAL again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                        Text(' ',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                        Text(
+                            'Clicking the LOW button before or after clicking the REVEAL button',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                        Text(' will be an automatic gameover.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              color: Color.fromARGB(255, 252, 252, 252),
+                            )),
+                      ],
+                    )),
+                  )
+                ]))));
+  }
+}
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -87,8 +312,8 @@ class HomeState extends State<Home> {
           child: Stack(
             children: [
               Positioned(
-                top: 25,
-                left: 1060,
+                bottom: 5,
+                left: 1025,
                 child: Image.asset(
                   'assets/$guessed_card5.png',
                   width: 120,
@@ -96,8 +321,8 @@ class HomeState extends State<Home> {
                 ),
               ),
               Positioned(
-                top: 25,
-                left: 855,
+                bottom: 5,
+                left: 825,
                 child: Image.asset(
                   'assets/$guessed_card4.png',
                   width: 120,
@@ -105,8 +330,8 @@ class HomeState extends State<Home> {
                 ),
               ),
               Positioned(
-                top: 25,
-                left: 640,
+                bottom: 5,
+                left: 625,
                 child: Image.asset(
                   'assets/$guessed_card3.png',
                   width: 120,
@@ -114,8 +339,8 @@ class HomeState extends State<Home> {
                 ),
               ),
               Positioned(
-                top: 25,
-                left: 420,
+                bottom: 5,
+                left: 425,
                 child: Image.asset(
                   'assets/$guessed_card2.png',
                   width: 120,
@@ -123,8 +348,8 @@ class HomeState extends State<Home> {
                 ),
               ),
               Positioned(
-                top: 25,
-                left: 200,
+                bottom: 5,
+                left: 225,
                 child: Image.asset(
                   'assets/$guessed_card1.png',
                   width: 120,
@@ -132,17 +357,17 @@ class HomeState extends State<Home> {
                 ),
               ),
               Positioned(
-                bottom: 130,
+                top: 50,
                 left: 600,
                 child: Image.asset(
                   'assets/$guessed_card1.png',
-                  width: 200,
-                  height: 280,
+                  width: 170,
+                  height: 300,
                 ),
               ),
               Positioned(
-                bottom: 20,
-                left: 200,
+                bottom: 250,
+                left: 360,
                 child: ElevatedButton(
                   onPressed: () {
                     List<int> cardValues = [
@@ -232,17 +457,19 @@ class HomeState extends State<Home> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                      padding: EdgeInsets.fromLTRB(47, 50, 47, 50)),
-                  child: Text(
-                    'HIGH',
-                    textAlign: TextAlign.center,
-                  ),
+                      primary: Color.fromARGB(184, 218, 165, 32),
+                      padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+                  child: Text('HIGH',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Color.fromARGB(255, 252, 252, 252),
+                      )),
                 ),
               ),
               Positioned(
-                bottom: 20,
-                left: 1050,
+                bottom: 250,
+                left: 870,
                 child: ElevatedButton(
                   onPressed: () {
                     List<int> cardValues = [
@@ -331,23 +558,25 @@ class HomeState extends State<Home> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 14, 202, 39),
-                      padding: EdgeInsets.fromLTRB(50, 50, 50, 48)),
-                  child: Text(
-                    'LOW',
-                    textAlign: TextAlign.center,
-                  ),
+                      primary: Color.fromARGB(184, 218, 165, 32),
+                      padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+                  child: Text('LOW',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )),
                 ),
               ),
               Positioned(
-                  bottom: 20,
-                  left: 635,
+                  bottom: 250,
+                  left: 600,
                   child: Getpicture(
                     callback: callback,
                   )),
               Positioned(
-                  top: 15,
-                  left: 655,
+                  top: 20,
+                  left: 640,
                   child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -364,122 +593,6 @@ class HomeState extends State<Home> {
       ),
     );
   }
-}
-
-class Getpicture extends StatelessWidget {
-  int selector = 0;
-
-  final Function callback;
-  Getpicture({
-    Key? key,
-    required this.callback,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
-          selector = Random().nextInt(52);
-          callback(selector);
-        },
-        style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.fromLTRB(40, 47, 40, 47)),
-        child: Text(
-          'REVEAL',
-          textAlign: TextAlign.center,
-        ));
-  }
-}
-
-class Gameover extends StatefulWidget {
-  const Gameover({Key? key}) : super(key: key);
-
-  @override
-  State<Gameover> createState() => MenuState();
-}
-
-class MenuState extends State<Gameover> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('menu.jpg'), fit: BoxFit.cover)),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.black12.withOpacity(0.0),
-                  Colors.black87.withOpacity(0.6)
-                ], begin: Alignment.center),
-              ),
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 1366.0,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: const [Colors.black12, Colors.black87])),
-                  )),
-            ),
-          ),
-          Positioned(
-              left: 700,
-              bottom: 200,
-              child: Image.asset(
-                'GAMEOVER.png',
-                width: 600,
-                height: 500,
-              )),
-          Positioned(
-              left: 928,
-              bottom: 280,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
-                },
-                style: ButtonStyle(
-                    maximumSize: MaterialStateProperty.all(Size(200, 150)),
-                    textStyle: MaterialStateProperty.all(TextStyle(
-                      fontSize: 30,
-                    )),
-                    elevation: MaterialStateProperty.all<double>(20.0),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(184, 218, 165, 32))),
-                child: Text('Try Again'),
-              )),
-          Positioned(
-              left: 970,
-              bottom: 180,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu()));
-                },
-                style: ButtonStyle(
-                    maximumSize: MaterialStateProperty.all(Size(200, 150)),
-                    textStyle: MaterialStateProperty.all(TextStyle(
-                      fontSize: 30,
-                    )),
-                    elevation: MaterialStateProperty.all<double>(20.0),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 161, 7, 7))),
-                child: Text('Exit'),
-              ))
-        ],
-      ),
-    );
-  }
-}
-
-class Menu extends StatefulWidget {
-  const Menu({Key? key}) : super(key: key);
-
-  @override
-  State<Menu> createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
@@ -511,168 +624,49 @@ class _MenuState extends State<Menu> {
             ),
           ),
           Positioned(
-              left: 355,
-              bottom: 200,
+              left: 205,
+              bottom: 50,
               child: Image.asset(
-                'assets/hi-lo_cardgame.png',
-                width: 700,
-                height: 600,
+                'assets/Hi-lo_cardgame.png',
+                width: 1000,
+                height: 900,
               )),
           Positioned(
-              left: 655,
-              bottom: 230,
+              left: 505,
+              bottom: 150,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
-                },
-                style: ButtonStyle(
-                    maximumSize: MaterialStateProperty.all(Size(200, 150)),
-                    textStyle: MaterialStateProperty.all(TextStyle(
-                      fontSize: 30,
-                    )),
-                    elevation: MaterialStateProperty.all<double>(20.0),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(184, 218, 165, 32))),
-                child: Text('Start'),
-              )),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(184, 218, 165, 32),
+                      padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+                  child: Text('Start',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )))),
           Positioned(
-              left: 605,
-              bottom: 90,
+              left: 755,
+              bottom: 150,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Howtoplay()));
-                },
-                style: ButtonStyle(
-                    maximumSize: MaterialStateProperty.all(Size(200, 150)),
-                    textStyle: MaterialStateProperty.all(TextStyle(
-                      fontSize: 30,
-                    )),
-                    elevation: MaterialStateProperty.all<double>(20.0),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(184, 218, 165, 32))),
-                child: Text('How To Play'),
-              ))
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Howtoplay()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(184, 218, 165, 32),
+                      padding: EdgeInsets.fromLTRB(10, 13, 10, 13)),
+                  child: Text('How to Play',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )))),
         ],
       ),
     );
-  }
-}
-
-ResponsiveWidget({required Column mobile, required Column desktop}) {}
-
-class Howtoplay extends StatelessWidget {
-  const Howtoplay({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            body: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('backgroundhelp.jpg'),
-                        fit: BoxFit.cover)),
-                child: Stack(children: [
-                  Positioned(
-                      left: 650,
-                      bottom: 90,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Menu()));
-                        },
-                        style: ButtonStyle(
-                            maximumSize:
-                                MaterialStateProperty.all(Size(200, 150)),
-                            textStyle: MaterialStateProperty.all(TextStyle(
-                              fontSize: 30,
-                            )),
-                            elevation: MaterialStateProperty.all<double>(20.0),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color.fromARGB(184, 218, 165, 32))),
-                        child: Text('Back'),
-                      )),
-                  Positioned(
-                    left: 190,
-                    bottom: 230,
-                    child: SingleChildScrollView(
-                        child: Column(
-                      children: const [
-                        Text('Instructions:',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 253, 250, 250),
-                            )),
-                        Text(' ',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                        Text(
-                            'To play the game, click the reveal button first to reveal the first card,',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                        Text(
-                            'After that, you can choose between HIGH or LOW to guess the next card,',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                        Text(
-                            'Click the reveal button again and repeat the steps,',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                        Text(
-                            'Just click REVEAL, choose between HIGH or LOW then click REVEAL again.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                        Text(' ',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                        Text(
-                            'Clicking the LOW button before or after clicking the REVEAL button',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                        Text(' will be an automatic gameover.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'IndieFlower',
-                              fontSize: 30,
-                              color: Color.fromARGB(255, 252, 252, 252),
-                            )),
-                      ],
-                    )),
-                  )
-                ]))));
   }
 }
